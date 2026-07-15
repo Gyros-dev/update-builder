@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>KASSIR.RU — конструктор рассылки</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <img src="assets/kassir.png" alt="KASSIR.RU">
+    <div>
+      <h1>Конструктор обновлений</h1>
+      <p>Добавьте текст и скриншоты, затем скачайте готовый HTML для письма.</p>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel editor-panel">
+      <div class="panel-title">
+        <div><span class="eyebrow">Настройки письма</span><h2>Содержание</h2></div>
+        <button class="button ghost" id="resetBtn" type="button">Очистить</button>
+      </div>
+
+      <div class="grid two">
+        <label>Дата релиза<input id="releaseDate" type="text" inputmode="numeric" maxlength="10" placeholder="ДД.ММ.ГГГГ" autocomplete="off"></label>
+        <label>Заголовок<input id="mainTitle" type="text" value="TicketRain стал удобнее"></label>
+      </div>
+      <label>Краткое описание<textarea id="intro" rows="3">Новые возможности и важные изменения — в одном коротком письме.</textarea></label>
+
+      <div class="section-head">
+        <div><span class="eyebrow">Список</span><h2>Обновления</h2></div>
+        <button class="button primary" id="addItemBtn" type="button">+ Добавить</button>
+      </div>
+      <div id="items"></div>
+
+      <details class="optional">
+        <summary>Дополнительные блоки</summary>
+        <label>Блок «Скоро» — заголовок<input id="soonTitle" type="text" placeholder="Например: Новый шлюз"></label>
+        <label>Блок «Скоро» — описание<textarea id="soonText" rows="3" placeholder="Оставьте пустым, чтобы блок не показывался"></textarea></label>
+        <label>Подпись автора<input id="author" type="text" value="Руслан Шарафутдинов · TicketRain"></label>
+        <label>Контактная строка<input id="contact" type="text" value="Если вы обнаружили ошибку или у вас есть вопросы по поводу новой функциональности системы, можете оставить нам обращение"></label>
+        <div class="grid two">
+          <label>Ссылка в контактной строке<input id="contactLink" type="url" value="https://jira.ka.ru/customer/portal/4/group/139" placeholder="https://example.com"></label>
+          <label>Текст ссылки<input id="contactLinkText" type="text" value="по ссылке" placeholder="Например: по ссылке"></label>
+        </div>
+      </details>
+
+      <div class="actions">
+        <button class="button primary large" id="downloadBtn" type="button">Скачать HTML для отправки</button>
+        <button class="button large" id="downloadPdfBtn" type="button">Скачать PDF</button>
+        <button class="button" id="saveJsonBtn" type="button">Сохранить черновик</button>
+        <label class="button file-button">Загрузить черновик<input id="loadJsonInput" type="file" accept="application/json"></label>
+      </div>
+      <p class="hint">Скачанный HTML автономный: логотип и скриншоты встраиваются внутрь файла. Кнопка PDF откроет системное окно печати — выберите «Сохранить как PDF». Перед рассылкой откройте HTML в браузере и скопируйте содержимое письма.</p>
+    </section>
+
+    <section class="panel preview-panel">
+      <div class="panel-title"><div><span class="eyebrow">Предпросмотр</span><h2>Готовое письмо</h2></div></div>
+      <iframe id="preview" title="Предпросмотр письма"></iframe>
+    </section>
+  </main>
+
+  <template id="itemTemplate">
+    <article class="item-card">
+      <div class="item-toolbar">
+        <span class="drag-label">Обновление <b class="item-number"></b></span>
+        <div>
+          <button type="button" class="icon-button move-up" title="Выше">↑</button>
+          <button type="button" class="icon-button move-down" title="Ниже">↓</button>
+          <button type="button" class="icon-button danger remove" title="Удалить">×</button>
+        </div>
+      </div>
+      <label>Заголовок<input class="item-title" type="text" placeholder="Название обновления"></label>
+      <label>Описание</label>
+      <div class="rich-editor-wrap">
+        <div class="rich-toolbar" role="toolbar" aria-label="Форматирование описания">
+          <button type="button" class="format-button" data-command="bold" title="Жирный"><b>Ж</b></button>
+          <button type="button" class="format-button" data-command="italic" title="Курсив"><i>К</i></button>
+          <button type="button" class="format-button" data-command="underline" title="Подчёркнутый"><u>Ч</u></button>
+          <button type="button" class="format-button" data-command="insertUnorderedList" title="Маркированный список">• Список</button>
+          <button type="button" class="format-button" data-command="insertOrderedList" title="Нумерованный список">1. Список</button>
+          <button type="button" class="format-button add-link" title="Добавить ссылку">Ссылка</button>
+          <button type="button" class="format-button" data-command="removeFormat" title="Очистить форматирование">Очистить</button>
+        </div>
+        <div class="item-text rich-editor" contenteditable="true" data-placeholder="Что изменилось и чем это полезно"></div>
+      </div>
+      <div class="image-row">
+        <label class="button file-button">Добавить скриншот<input class="item-image" type="file" accept="image/*"></label>
+        <button type="button" class="button remove-image" hidden>Убрать скриншот</button>
+        <span class="image-name">Скриншот не выбран</span>
+      </div>
+      <label>Подпись под скриншотом<input class="item-caption" type="text" placeholder="Необязательно"></label>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
