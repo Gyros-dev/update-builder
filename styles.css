@@ -38,3 +38,40 @@
 }
 
 .mail-guide{margin-top:20px;border:1px solid #e1e4e8;border-radius:16px;background:#fafbfc;overflow:hidden}.mail-guide summary{cursor:pointer;padding:18px 20px;font-size:16px;font-weight:800;color:#202126;list-style:none}.mail-guide summary::-webkit-details-marker{display:none}.mail-guide summary::before{content:'▶';display:inline-block;margin-right:10px;font-size:12px;transition:transform .2s ease}.mail-guide[open] summary::before{transform:rotate(90deg)}.mail-guide[open] summary{border-bottom:1px solid #e8eaee}.mail-guide__notice{margin:18px 20px 0;padding:12px 14px;border-radius:11px;background:#fff7df;color:#5d4a15;font-size:13px;line-height:19px}.mail-guide__steps{margin:18px 34px 6px 42px;padding:0;color:#4f555f;font-size:14px;line-height:21px}.mail-guide__steps li{margin-bottom:12px;padding-left:4px}.mail-guide__steps strong{color:#202126}.mail-guide__steps code{padding:2px 5px;border-radius:5px;background:#eceff3;color:#34383f}.mail-guide__images{display:grid;grid-template-columns:1fr;gap:16px;padding:10px 20px 20px}.mail-guide__images figure{margin:0;padding:10px;border:1px solid #e1e4e8;border-radius:13px;background:#fff}.mail-guide__images img{display:block;width:100%;height:auto;border-radius:8px}.mail-guide__images figcaption{padding:10px 4px 2px;color:#717781;font-size:12px;line-height:18px}.mail-guide__pdf{margin:0 20px 20px;text-decoration:none}.actions{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}.actions .button,.actions .file-button{width:100%;height:56px;min-height:56px;padding:0 16px;text-align:center;box-sizing:border-box}.actions>:nth-child(1),.actions>:nth-child(2),.actions>:nth-child(3){grid-column:span 2}.actions>:nth-child(4),.actions>:nth-child(5){grid-column:span 3}@media(max-width:650px){.actions{grid-template-columns:1fr}.actions>*{grid-column:auto!important}.mail-guide__steps{margin-left:34px}.mail-guide__notice,.mail-guide__images{margin-left:0;margin-right:0}.mail-guide__pdf{width:calc(100% - 40px)}}
+/* Скриншот: кнопки в одну строку, имя файла — отдельной строкой */
+.image-row .button,
+.image-row .file-button {
+  height: 42px;
+  min-height: 42px;
+  margin: 0;
+  padding: 10px 14px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.image-row .image-name {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  padding: 2px 2px 0;
+}
+
+@media (max-width: 650px) {
+  .image-row {
+    grid-template-columns: 1fr;
+  }
+
+  .image-row .image-name {
+    grid-column: auto;
+  }
+}
