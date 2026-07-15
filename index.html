@@ -50,12 +50,32 @@
 
       <div class="actions">
         <button class="button primary large" id="copyHtmlBtn" type="button">Копировать HTML-код</button>
-        <button class="button large" id="downloadBtn" type="button">Скачать HTML</button>
+        <button class="button large" id="downloadBtn" type="button">Скачать HTML для отправки</button>
         <button class="button large" id="downloadPdfBtn" type="button">Скачать PDF</button>
         <button class="button" id="saveJsonBtn" type="button">Сохранить черновик</button>
         <label class="button file-button">Загрузить черновик<input id="loadJsonInput" type="file" accept="application/json"></label>
       </div>
-      <p class="hint">Кнопка «Копировать HTML-код» помещает полный код письма в буфер обмена — его можно вставить в режим редактирования исходного HTML письма. Скачанный HTML автономный: логотип и скриншоты встраиваются внутрь файла. Кнопка PDF откроет системное окно печати — выберите «Сохранить как PDF».</p>
+      <p class="hint">Скачанный HTML автономный: логотип и скриншоты встраиваются внутрь файла. Кнопка «Копировать HTML-код» помещает полный код письма в буфер обмена — его можно вставить в режим редактирования исходного HTML письма. Кнопка PDF откроет системное окно печати — выберите «Сохранить как PDF».</p>
+
+      <details class="mail-guide">
+        <summary>Как отправить рассылку через VK Почту</summary>
+        <div class="mail-guide__notice">Инструкция работает только в браузерной версии VK WorkSpace. Перед отправкой проверьте письмо в тестовой рассылке.</div>
+
+        <ol class="mail-guide__steps">
+          <li><strong>Сформируйте письмо</strong> и нажмите кнопку «Копировать HTML-код».</li>
+          <li><strong>Создайте новое письмо</strong> в VK Почте. В пустой области письма нажмите правой кнопкой мыши и выберите «Исследовать элемент» / Inspect Element.</li>
+          <li><strong>В панели Elements</strong> найдите редактируемый блок письма — элемент <code>&lt;div&gt;&lt;br&gt;&lt;/div&gt;</code>. Нажмите по нему правой кнопкой мыши и выберите «Edit as HTML».</li>
+          <li><strong>Удалите старое содержимое</strong>, вставьте скопированный HTML-код и примените изменение. Закройте инструменты разработчика и проверьте письмо.</li>
+        </ol>
+
+        <div class="mail-guide__images">
+          <figure><img src="assets/instruction/vk-mail-1.png" alt="Копирование HTML-кода и открытие инструментов разработчика"><figcaption>1. Скопируйте HTML и откройте инструменты разработчика в новом письме.</figcaption></figure>
+          <figure><img src="assets/instruction/vk-mail-2.png" alt="Редактирование HTML блока письма"><figcaption>2. Выберите редактируемый блок и вставьте код через «Edit as HTML».</figcaption></figure>
+          <figure><img src="assets/instruction/vk-mail-3.png" alt="Готовое письмо в VK Почте"><figcaption>3. Проверьте готовое письмо перед отправкой.</figcaption></figure>
+        </div>
+
+        <a class="button mail-guide__pdf" href="assets/instruction/vk-mail-guide.pdf" target="_blank" rel="noopener">Открыть инструкцию в PDF</a>
+      </details>
     </section>
 
     <section class="panel preview-panel">
