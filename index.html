@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>KASSIR.RU — конструктор рассылки</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -30,9 +31,11 @@
 
       <div class="section-head">
         <div><span class="eyebrow">Список</span><h2>Обновления</h2></div>
-        <button class="button primary" id="addItemBtn" type="button">+ Добавить</button>
       </div>
       <div id="items"></div>
+      <div class="add-item-bottom">
+        <button class="button primary" id="addItemBtn" type="button">+ Добавить обновление</button>
+      </div>
 
       <details class="optional">
         <summary>Дополнительные блоки</summary>
@@ -41,18 +44,40 @@
         <label>Подпись автора<input id="author" type="text" value="Руслан Шарафутдинов · TicketRain"></label>
         <label>Контактная строка<input id="contact" type="text" value="Если вы обнаружили ошибку или у вас есть вопросы по поводу новой функциональности системы, можете оставить нам обращение"></label>
         <div class="grid two">
-          <label>Ссылка в контактной строке<input id="contactLink" type="url" value="https://jira.ka.ru/customer/portal/4/group/139" placeholder="https://example.com"></label>
+          <label>Ссылка в контактной строке<input id="contactLink" type="url" value="https://" placeholder="https://example.com"></label>
           <label>Текст ссылки<input id="contactLinkText" type="text" value="по ссылке" placeholder="Например: по ссылке"></label>
         </div>
       </details>
 
       <div class="actions">
-        <button class="button primary large" id="downloadBtn" type="button">Скачать HTML для отправки</button>
+        <button class="button primary large" id="copyHtmlBtn" type="button">Копировать HTML-код</button>
+        <button class="button large" id="downloadBtn" type="button">Скачать HTML для отправки</button>
         <button class="button large" id="downloadPdfBtn" type="button">Скачать PDF</button>
         <button class="button" id="saveJsonBtn" type="button">Сохранить черновик</button>
         <label class="button file-button">Загрузить черновик<input id="loadJsonInput" type="file" accept="application/json"></label>
       </div>
-      <p class="hint">Скачанный HTML автономный: логотип и скриншоты встраиваются внутрь файла. Кнопка PDF откроет системное окно печати — выберите «Сохранить как PDF». Перед рассылкой откройте HTML в браузере и скопируйте содержимое письма.</p>
+      <p class="hint">Скачанный HTML автономный: логотип и скриншоты встраиваются внутрь файла. Кнопка «Копировать HTML-код» помещает полный код письма в буфер обмена — его можно вставить в режим редактирования исходного HTML письма. Кнопка PDF откроет системное окно печати — выберите «Сохранить как PDF».</p>
+
+      <details class="mail-guide">
+        <summary>Как отправить письмо через VK Почту</summary>
+        <div class="mail-guide__notice">Инструкция работает только в браузерной версии VK WorkSpace. Перед отправкой проверьте письмо в тестовой рассылке.</div>
+
+        <ol class="mail-guide__steps">
+          <li><strong>Сформируйте письмо</strong> и нажмите кнопку «Копировать HTML-код».</li>
+          <li><strong>Создайте новое письмо</strong> в VK Почте. В пустой области письма нажмите правой кнопкой мыши и выберите «Исследовать элемент» / Inspect Element.</li>
+          <li><strong>В панели Elements</strong> найдите редактируемый блок письма — элемент <code>&lt;div&gt;&lt;br&gt;&lt;/div&gt;</code>. Нажмите по нему правой кнопкой мыши и выберите «Edit as HTML».</li>
+          <li><strong>Вставьте скопированный HTML-код перед <code>&lt;/div&gt;</code> </strong> и примените изменение. Закройте инструменты разработчика и проверьте письмо.</li>
+        </ol>
+
+        <div class="mail-guide__images">
+          <figure><img src="assets/instruction/vk-mail-1.png" alt="Копирование HTML-кода и открытие инструментов разработчика"><figcaption>1. Скопируйте HTML и откройте инструменты разработчика в новом письме.</figcaption></figure>
+          <figure><img src="assets/instruction/vk-mail-2.png" alt="Редактирование HTML блока письма"><figcaption>2. Выберите редактируемый блок и вставьте код через «Edit as HTML».</figcaption></figure>
+          <figure><img src="assets/instruction/vk-mail-3.png" alt="Готовое письмо в VK Почте"><figcaption>3. Проверьте готовое письмо перед отправкой.</figcaption></figure>
+        </div>
+
+
+        <a class="button mail-guide__pdf" href="assets/instruction/vk-mail-guide.pdf" target="_blank" rel="noopener">Открыть инструкцию в PDF</a>
+      </details>
     </section>
 
     <section class="panel preview-panel">
@@ -87,6 +112,7 @@
       </div>
       <div class="image-row">
         <label class="button file-button">Добавить скриншот<input class="item-image" type="file" accept="image/*"></label>
+        <button type="button" class="button paste-image" title="Вставить изображение, скопированное в буфер обмена">Вставить из буфера</button>
         <button type="button" class="button remove-image" hidden>Убрать скриншот</button>
         <span class="image-name">Скриншот не выбран</span>
       </div>
